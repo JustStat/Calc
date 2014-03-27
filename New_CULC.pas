@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Menus, CalcTypes;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Menus;
 
 type
   TCalcAction = (caNone, caPLUS, caMINUS, caMUL, caDIV, caSQRT,
@@ -248,5 +248,6 @@ begin
     Key := ',';
 
 end;
+// test com.
 
 end.

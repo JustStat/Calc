@@ -2,8 +2,7 @@ program Culc_new;
 
 uses
   Vcl.Forms,
-  New_CULC in 'New_CULC.pas' {MainF},
-  CalcTypes in 'CalcTypes.pas';
+  New_CULC in 'New_CULC.pas' {MainF};
 
 {$R *.res}
 
