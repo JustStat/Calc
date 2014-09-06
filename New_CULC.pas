@@ -64,7 +64,7 @@ type
     { Public declarations }
     CurrentCalcAction: TCalcAction;
     A, B: TCalcResultType;
-    i, ErrorType: integer;
+    Ravno, ErrorType: integer;
     procedure SetEditFocus;
     function DoCalc(CalcAction: TCalcAction): TCalcResultType;
     function DoButtonPress(ButtonAction: TCalcAction): TCalcResultType;
@@ -170,7 +170,7 @@ begin
   EditResult.Clear;
   A := 0;
   B := 0;
-  i := 0;
+  Ravno := 0;
   CurrentCalcAction := caNone;
   SetEditFocus;
   for f := 0 to self.ComponentCount - 1 do
@@ -189,17 +189,17 @@ begin
     begin
       if (EditResult.Text <> '') then
       begin
-        if (i < 1) then
+        if (Ravno < 1) then
         begin
           EditResult.Text := floattostr(DoButtonPress(CurrentCalcAction));
         end;
       end;
-      if (i = 1) then
+      if (Ravno = 1) then
       begin
         A := strtofloat(EditResult.Text);
         EditResult.Text := floattostr(DoCalc(CurrentCalcAction));
       end;
-      i := 1;
+      Ravno := 1;
       OPERATIONEdit.Clear;
       SetEditFocus;
     end;
@@ -223,7 +223,7 @@ var
   f: integer;
 begin
   try
-    if (CurrentCalcAction = caNone) or (i > 0) then
+    if (CurrentCalcAction = caNone) or (Ravno > 0) then
     begin
       if (EditResult.Text <> '') then
       begin
@@ -249,7 +249,7 @@ begin
     end;
     CurrentCalcAction := ButtonAction;
     EditResult.Clear;
-    i := 0
+    Ravno := 0
   except
     Error;
   end;
@@ -281,7 +281,7 @@ begin
     caPERCENT:
       ;
   end;
-  i := 0;
+  Ravno := 0;
 end;
 
 procedure TMainF.FormClick(Sender: TObject);
@@ -293,7 +293,7 @@ procedure TMainF.FormCreate(Sender: TObject);
 begin
   // EditResult.Text := '0';
   CurrentCalcAction := caNone;
-  i := 0;
+  Ravno := 0;
 end;
 
 procedure TMainF.MExitClick(Sender: TObject);
