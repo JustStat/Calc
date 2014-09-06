@@ -81,6 +81,7 @@ object MainF: TMainF
     Height = 38
     Caption = #177
     TabOrder = 6
+    OnClick = ButtonOPOSEClick
   end
   object Button2: TButton
     Left = 47
@@ -172,6 +173,7 @@ object MainF: TMainF
     Height = 38
     Caption = '1/x'
     TabOrder = 16
+    OnClick = ButtonDROBClick
   end
   object ButtonEQUAL: TButton
     Left = 169
@@ -234,6 +236,7 @@ object MainF: TMainF
     Height = 21
     Alignment = taRightJustify
     TabOrder = 23
+    Text = '0'
     OnKeyPress = EditResultKeyPress
   end
   object OPERATIONEdit: TEdit
@@ -256,7 +259,7 @@ object MainF: TMainF
       end
     end
     object N4: TMenuItem
-      Caption = #1057#1087#1072#1088#1074#1082#1072
+      Caption = #1057#1087#1088#1072#1074#1082#1072
       object N2: TMenuItem
         Caption = #1048#1089#1090#1086#1088#1080#1103
       end
