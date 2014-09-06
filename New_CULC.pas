@@ -57,6 +57,7 @@ type
     procedure ButtonOPOSEClick(Sender: TObject);
     procedure ButtonDROBClick(Sender: TObject);
     procedure ButtonDOTClick(Sender: TObject);
+    procedure ButtonREMOVEClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -94,6 +95,12 @@ begin
     Error;
 
   end;
+end;
+
+procedure TMainF.ButtonREMOVEClick(Sender: TObject);
+begin
+
+EditResult.text:=Copy(EditResult.text, 1, length(EditResult.text)-1);
 end;
 
 procedure TMainF.ButtonSQRTClick(Sender: TObject);

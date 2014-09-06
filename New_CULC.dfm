@@ -191,6 +191,7 @@ object MainF: TMainF
     Height = 38
     Caption = '<--'
     TabOrder = 18
+    OnClick = ButtonREMOVEClick
   end
   object ButtonCE: TButton
     Left = 47
