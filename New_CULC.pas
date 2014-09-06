@@ -89,8 +89,7 @@ end;
 procedure TMainF.ButtonOPOSEClick(Sender: TObject);
 begin
   try
-    A := -strtofloat(EditResult.Text);
-    EditResult.Text := floattostr(A);
+    EditResult.Text := floattostr(-strtofloat(EditResult.Text));
   except
     Error;
 
