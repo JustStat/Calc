@@ -63,7 +63,7 @@ object MainF: TMainF
     Height = 38
     Caption = ','
     TabOrder = 4
-    OnClick = ButtonNumClick
+    OnClick = ButtonDOTClick
   end
   object Button3: TButton
     Left = 87
@@ -251,16 +251,16 @@ object MainF: TMainF
   object MainMenu1: TMainMenu
     Left = 152
     Top = 11
-    object N1: TMenuItem
+    object MFile: TMenuItem
       Caption = #1060#1072#1081#1083
-      object N3: TMenuItem
+      object MExit: TMenuItem
         Caption = #1042#1099#1081#1090#1080
-        OnClick = N3Click
+        OnClick = MExitClick
       end
     end
-    object N4: TMenuItem
+    object MHelp: TMenuItem
       Caption = #1057#1087#1088#1072#1074#1082#1072
-      object N2: TMenuItem
+      object MHistory: TMenuItem
         Caption = #1048#1089#1090#1086#1088#1080#1103
       end
     end

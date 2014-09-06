@@ -38,17 +38,17 @@ type
     ButtonC: TButton;
     Button6: TButton;
     MainMenu1: TMainMenu;
-    N1: TMenuItem;
-    N2: TMenuItem;
-    N3: TMenuItem;
-    N4: TMenuItem;
+    MFile: TMenuItem;
+    MHistory: TMenuItem;
+    MExit: TMenuItem;
+    MHelp: TMenuItem;
     EditResult: TEdit;
     OPERATIONEdit: TEdit;
     procedure ButtonNumClick(Sender: TObject);
     procedure ButtonCEClick(Sender: TObject);
     procedure EditResultKeyPress(Sender: TObject; var Key: Char);
     procedure FormClick(Sender: TObject);
-    procedure N3Click(Sender: TObject);
+    procedure MExitClick(Sender: TObject);
     procedure ButtonActionClick(Sender: TObject);
     procedure ButtonSQRTClick(Sender: TObject);
     procedure ButtonEQUALClick(Sender: TObject);
@@ -56,6 +56,7 @@ type
     procedure ButtonCClick(Sender: TObject);
     procedure ButtonOPOSEClick(Sender: TObject);
     procedure ButtonDROBClick(Sender: TObject);
+    procedure ButtonDOTClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -87,9 +88,8 @@ end;
 procedure TMainF.ButtonOPOSEClick(Sender: TObject);
 begin
   try
-    A := strtofloat(EditResult.Text);
-    EditResult.Text := floattostr(A * (-1));
-    A := strtofloat(EditResult.Text);
+    A := -strtofloat(EditResult.Text);
+    EditResult.Text := floattostr(A);
   except
     Error;
 
@@ -134,6 +134,18 @@ procedure TMainF.ButtonCEClick(Sender: TObject);
 begin
   EditResult.Clear;
   SetEditFocus;
+end;
+
+procedure TMainF.ButtonDOTClick(Sender: TObject);
+var
+  k, b: integer;
+begin
+  if (EditResult.Text <> '') then
+    k := Pos(',', EditResult.Text);
+    if k = 0 then
+begin
+      EditResult.Text :=  EditResult.Text + (Sender as TButton).Caption;
+      end;
 end;
 
 procedure TMainF.ButtonDROBClick(Sender: TObject);
@@ -278,7 +290,7 @@ begin
   i := 0;
 end;
 
-procedure TMainF.N3Click(Sender: TObject);
+procedure TMainF.MExitClick(Sender: TObject);
 begin
   close;
 end;
