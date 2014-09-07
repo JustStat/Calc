@@ -1,11 +1,11 @@
-unit New_CULC;
+Ôªøunit New_CULC;
 
 interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Menus, Vcl.XPMan;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Menus;
 
 type
   TCalcAction = (caNone, caPLUS, caMINUS, caMUL, caDIV, caSQRT,
@@ -344,8 +344,8 @@ procedure TMainF.Error;
 var
   f: integer;
 begin
-  EditResult.Text := 'Œ¯Ë·Í‡!';
-  OPERATIONEdit.Clear; // Œ¯Ë·Í‡!
+  EditResult.Text := '–û—à–∏–±–∫–∞!';
+  OPERATIONEdit.Clear; // –û—à–∏–±–∫–∞!
   for f := 0 to self.ComponentCount - 1 do
     if (self.components[f].Name <> 'ButtonC') and (self.components[f] is TButton)
     then
