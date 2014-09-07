@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Menus;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Menus, Vcl.XPMan;
 
 type
   TCalcAction = (caNone, caPLUS, caMINUS, caMUL, caDIV, caSQRT,
@@ -89,6 +89,7 @@ end;
 procedure TMainF.ButtonOPOSEClick(Sender: TObject);
 begin
   try
+  if EditResult.Text <> '' then
     EditResult.Text := floattostr(-strtofloat(EditResult.Text));
   except
     Error;
@@ -105,7 +106,8 @@ end;
 procedure TMainF.ButtonSQRTClick(Sender: TObject);
 begin
   try
-    EditResult.Text := floattostr(DoCalc(caSQRT));
+   if EditResult.Text <> '' then
+EditResult.Text := floattostr(DoCalc(caSQRT));
   except
     Error;
   end;
@@ -158,8 +160,6 @@ procedure TMainF.ButtonDROBClick(Sender: TObject);
 begin
   if (EditResult.Text <> '') and (EditResult.Text <> '0') then
     EditResult.Text := floattostr(1 / strtofloat(EditResult.Text))
-  else
-    Error;
 end;
 
 procedure TMainF.ButtonCClick(Sender: TObject);
@@ -193,7 +193,6 @@ begin
         begin
           EditResult.Text := floattostr(DoButtonPress(CurrentCalcAction));
         end;
-      end;
       if (Ravno = 1) then
       begin
         A := strtofloat(EditResult.Text);
@@ -201,11 +200,13 @@ begin
       end;
       Ravno := 1;
       OPERATIONEdit.Clear;
-      SetEditFocus;
+
+    end;
     end;
   except
     Error;
   end;
+  SetEditFocus;
 end;
 
 procedure TMainF.SetEditFocus;
