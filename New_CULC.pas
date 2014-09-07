@@ -189,7 +189,7 @@ begin
     begin
       if (EditResult.Text <> '') then
       begin
-        if (Ravno < 1) then
+        if (Ravno = 0) then
         begin
           EditResult.Text := floattostr(DoButtonPress(CurrentCalcAction));
         end;
