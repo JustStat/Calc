@@ -1,4 +1,4 @@
-Ôªøunit New_CULC;
+unit New_CULC;
 
 interface
 
@@ -10,6 +10,9 @@ uses
 type
   TCalcAction = (caNone, caPLUS, caMINUS, caMUL, caDIV, caSQRT,
     caPERCENT, caRAVNO);
+
+type
+  TMemoryAction = (memClear, memRecal, memSave, memAdd, memAddOppose);
 
   TCalcResultType = Extended;
 
@@ -39,11 +42,16 @@ type
     Button6: TButton;
     MainMenu1: TMainMenu;
     MFile: TMenuItem;
-    MHistory: TMenuItem;
     MExit: TMenuItem;
-    MHelp: TMenuItem;
     EditResult: TEdit;
     OPERATIONEdit: TEdit;
+    ButtonMPlus: TButton;
+    ButtonMMinus: TButton;
+    ButtonMC: TButton;
+    ButtonMR: TButton;
+    ButtonMS: TButton;
+    N1: TMenuItem;
+    N2: TMenuItem;
     procedure ButtonNumClick(Sender: TObject);
     procedure ButtonCEClick(Sender: TObject);
     procedure EditResultKeyPress(Sender: TObject; var Key: Char);
@@ -58,17 +66,22 @@ type
     procedure ButtonDROBClick(Sender: TObject);
     procedure ButtonDOTClick(Sender: TObject);
     procedure ButtonREMOVEClick(Sender: TObject);
+    procedure ButtonPERSClick(Sender: TObject);
+    procedure EditResultEnter(Sender: TObject);
+    procedure ButtonMemoryClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     CurrentCalcAction: TCalcAction;
-    A, B: TCalcResultType;
+    CurrentMemoryAction: TMemoryAction;
+    A, B, MemorySymbol: TCalcResultType;
+    flag: boolean;
     Ravno, ErrorType: integer;
     procedure SetEditFocus;
-    function DoCalc(CalcAction: TCalcAction): TCalcResultType;
+    function CalcActions(CalcAction: TCalcAction): TCalcResultType;
     function DoButtonPress(ButtonAction: TCalcAction): TCalcResultType;
-    procedure Error;
+    procedure CalcError;
   end;
 
 var
@@ -80,37 +93,71 @@ implementation
 
 procedure TMainF.ButtonNumClick(Sender: TObject);
 begin
-  if EditResult.Text = '0' then
+  if (EditResult.Text = '0') or ((EditResult.Text = Floattostr(A)) and (flag))
+  then
     EditResult.Clear;
   EditResult.Text := EditResult.Text + (Sender as TButton).Caption;
   SetEditFocus;
+  flag := false;
 end;
 
 procedure TMainF.ButtonOPOSEClick(Sender: TObject);
 begin
   try
-  if EditResult.Text <> '' then
-    EditResult.Text := floattostr(-strtofloat(EditResult.Text));
+    if EditResult.Text <> '' then
+      EditResult.Text := Floattostr(-strtofloat(EditResult.Text));
+    SetEditFocus;
   except
-    Error;
+    CalcError;
 
+  end;
+end;
+
+procedure TMainF.ButtonPERSClick(Sender: TObject);
+begin
+  try
+    if EditResult.Text <> '' then
+      EditResult.Text := Floattostr(A / 100 * strtofloat(EditResult.Text));
+    SetEditFocus;
+  except
+    CalcError;
   end;
 end;
 
 procedure TMainF.ButtonREMOVEClick(Sender: TObject);
 begin
 
-EditResult.text:=Copy(EditResult.text, 1, length(EditResult.text)-1);
+  EditResult.Text := Copy(EditResult.Text, 1, length(EditResult.Text) - 1);
+  SetEditFocus;
 end;
 
 procedure TMainF.ButtonSQRTClick(Sender: TObject);
 begin
   try
-   if EditResult.Text <> '' then
-EditResult.Text := floattostr(DoCalc(caSQRT));
+    if EditResult.Text <> '' then
+      EditResult.Text := Floattostr(CalcActions(caSQRT));
+    SetEditFocus;
   except
-    Error;
+    CalcError;
   end;
+end;
+
+procedure TMainF.ButtonMemoryClick(Sender: TObject);
+begin
+  CurrentMemoryAction := TMemoryAction((Sender as TButton).Tag);
+  case CurrentMemoryAction of
+    memClear:
+      MemorySymbol := 0;
+    memRecal:
+      EditResult.Text := floattostr(MemorySymbol);
+    memSave:
+      MemorySymbol := strtofloat(EditResult.Text);
+    memAdd:
+      MemorySymbol := MemorySymbol + strtofloat(EditResult.Text);
+    memAddOppose:
+      MemorySymbol := MemorySymbol - strtofloat(EditResult.Text);
+  end;
+  SetEditFocus;
 end;
 
 procedure TMainF.ButtonActionClick(Sender: TObject);
@@ -118,11 +165,11 @@ var
   s: string;
 begin
   DoButtonPress(TCalcAction((Sender as TButton).Tag));
-  if (OPERATIONEdit.Text[Length(OPERATIONEdit.Text)] in ['+', '-', '*', '/'])
+  if (OPERATIONEdit.Text[length(OPERATIONEdit.Text)] in ['+', '-', '*', '/'])
   then
   begin
     s := OPERATIONEdit.Text;
-    Delete(s, Length(s), 1);
+    Delete(s, length(s), 1);
     OPERATIONEdit.Text := s;
   end;
   case (Sender as TButton).Tag of
@@ -146,20 +193,26 @@ end;
 
 procedure TMainF.ButtonDOTClick(Sender: TObject);
 var
-  k, b: integer;
+  k, B: integer;
 begin
   if (EditResult.Text <> '') then
     k := Pos(',', EditResult.Text);
-    if k = 0 then
-begin
-      EditResult.Text :=  EditResult.Text + (Sender as TButton).Caption;
-      end;
+  if k = 0 then
+  begin
+    EditResult.Text := EditResult.Text + (Sender as TButton).Caption;
+  end;
 end;
 
 procedure TMainF.ButtonDROBClick(Sender: TObject);
 begin
-  if (EditResult.Text <> '') and (EditResult.Text <> '0') then
-    EditResult.Text := floattostr(1 / strtofloat(EditResult.Text))
+  try
+    if (EditResult.Text <> '') and (EditResult.Text <> '0') then
+      EditResult.Text := Floattostr(1 / strtofloat(EditResult.Text));
+    SetEditFocus;
+  Except
+    CalcError;
+
+  end;
 end;
 
 procedure TMainF.ButtonCClick(Sender: TObject);
@@ -173,9 +226,9 @@ begin
   Ravno := 0;
   CurrentCalcAction := caNone;
   SetEditFocus;
-  for f := 0 to self.ComponentCount - 1 do
-    if (self.components[f] is TButton) then
-      (self.components[f] as TButton).Enabled := true;
+  for f := 0 to ComponentCount - 1 do
+    if (Components[f] is TButton) then
+      (Components[f] as TButton).Enabled := true;
   EditResult.Enabled := true;
   OPERATIONEdit.Enabled := true;
   SetEditFocus;
@@ -191,22 +244,23 @@ begin
       begin
         if (Ravno = 0) then
         begin
-          EditResult.Text := floattostr(DoButtonPress(CurrentCalcAction));
+          EditResult.Text := Floattostr(DoButtonPress(CurrentCalcAction));
         end;
-      if (Ravno = 1) then
-      begin
-        A := strtofloat(EditResult.Text);
-        EditResult.Text := floattostr(DoCalc(CurrentCalcAction));
-      end;
-      Ravno := 1;
-      OPERATIONEdit.Clear;
+        if (Ravno = 1) then
+        begin
+          A := strtofloat(EditResult.Text);
+          EditResult.Text := Floattostr(CalcActions(CurrentCalcAction));
+        end;
+        Ravno := 1;
+        OPERATIONEdit.Clear;
 
-    end;
+      end;
     end;
   except
-    Error;
+    CalcError;
   end;
   SetEditFocus;
+  flag := true;
 end;
 
 procedure TMainF.SetEditFocus;
@@ -214,7 +268,7 @@ begin
   if EditResult.Enabled = true then
   begin
     EditResult.setfocus;
-    EditResult.SelStart := Length(EditResult.Text);
+    EditResult.SelStart := length(EditResult.Text);
     EditResult.SelLength := 0;
   end;
 end;
@@ -229,12 +283,12 @@ begin
       if (EditResult.Text <> '') then
       begin
         A := strtofloat(EditResult.Text);
-        OPERATIONEdit.Text := floattostr(A);
+        OPERATIONEdit.Text := Floattostr(A);
       end
       else
       begin
         A := 0;
-        OPERATIONEdit.Text := floattostr(A);
+        OPERATIONEdit.Text := Floattostr(A);
       end;
     end
     else
@@ -242,22 +296,23 @@ begin
       if (EditResult.Text <> '') then
       begin
         B := strtofloat(EditResult.Text);
-        OPERATIONEdit.Text := OPERATIONEdit.Text + floattostr(B);
-        Result := DoCalc(CurrentCalcAction);
+        OPERATIONEdit.Text := OPERATIONEdit.Text + Floattostr(B);
+        Result := CalcActions(CurrentCalcAction);
         A := Result;
-        OPERATIONEdit.Text := floattostr(A);
+        OPERATIONEdit.Text := Floattostr(A);
       end;
     end;
     CurrentCalcAction := ButtonAction;
-    EditResult.Clear;
+    // EditResult.Clear;
+    flag := true;
     Ravno := 0
   except
-    Error;
+    CalcError;
   end;
 
 end;
 
-function TMainF.DoCalc(CalcAction: TCalcAction): TCalcResultType;
+function TMainF.CalcActions(CalcAction: TCalcAction): TCalcResultType;
 begin
   case CalcAction of
     caNone:
@@ -302,11 +357,21 @@ begin
   close;
 end;
 
+procedure TMainF.EditResultEnter(Sender: TObject);
+begin
+  if EditResult.Text = '' then
+    EditResult.Text := '0'
+end;
+
 procedure TMainF.EditResultKeyPress(Sender: TObject; var Key: Char);
 var
   k: integer;
 begin
-  if Key = #43 then
+  if EditResult.Text = '0' then
+    EditResult.Text := '';
+  if EditResult.Text = Floattostr(A) then
+    EditResult.Text := '';
+  if Key = '+' then
     ButtonPLUS.Click;
   if Key = #45 then
   begin
@@ -322,7 +387,7 @@ begin
   end;
 
   if Key = #13 then
-    ButtonEQUALClick(nil);
+    ButtonEQUALClick(ButtonEQUAL);
   if not(Key in ['0' .. '9', #8, ',', '.']) then
     Key := #0;
   if Key in [',', '.'] then
@@ -332,7 +397,7 @@ begin
   begin
     if EditResult.Text = '' then
       Key := #0;
-    For k := 1 to Length(EditResult.Text) do
+    For k := 1 to length(EditResult.Text) do
     begin
       if EditResult.Text[k] = ',' then
         Key := #0;
@@ -340,16 +405,16 @@ begin
   end;
 end;
 
-procedure TMainF.Error;
+procedure TMainF.CalcError;
 var
   f: integer;
 begin
-  EditResult.Text := '–û—à–∏–±–∫–∞!';
-  OPERATIONEdit.Clear; // –û—à–∏–±–∫–∞!
+  EditResult.Text := 'Œ¯Ë·Í‡!';
+  OPERATIONEdit.Clear; // Œ¯Ë·Í‡!
   for f := 0 to self.ComponentCount - 1 do
-    if (self.components[f].Name <> 'ButtonC') and (self.components[f] is TButton)
+    if (self.Components[f].Name <> 'ButtonC') and (self.Components[f] is TButton)
     then
-      (self.components[f] as TButton).Enabled := false;
+      (self.Components[f] as TButton).Enabled := false;
   EditResult.Enabled := false;
   OPERATIONEdit.Enabled := false;
 end;

@@ -4,7 +4,7 @@ object MainF: TMainF
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = #1050#1072#1083#1100#1082#1091#1083#1103#1090#1086#1088
-  ClientHeight = 286
+  ClientHeight = 334
   ClientWidth = 213
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -21,8 +21,8 @@ object MainF: TMainF
   PixelsPerInch = 96
   TextHeight = 13
   object Button7: TButton
-    Left = 7
-    Top = 198
+    Left = 8
+    Top = 243
     Width = 34
     Height = 38
     Caption = '7'
@@ -30,8 +30,8 @@ object MainF: TMainF
     OnClick = ButtonNumClick
   end
   object Button5: TButton
-    Left = 47
-    Top = 154
+    Left = 48
+    Top = 199
     Width = 34
     Height = 38
     Caption = '5'
@@ -39,8 +39,8 @@ object MainF: TMainF
     OnClick = ButtonNumClick
   end
   object Button0: TButton
-    Left = 7
-    Top = 242
+    Left = 8
+    Top = 287
     Width = 74
     Height = 38
     Caption = '0'
@@ -48,8 +48,8 @@ object MainF: TMainF
     OnClick = ButtonNumClick
   end
   object Button8: TButton
-    Left = 47
-    Top = 198
+    Left = 48
+    Top = 243
     Width = 34
     Height = 38
     Caption = '8'
@@ -57,8 +57,8 @@ object MainF: TMainF
     OnClick = ButtonNumClick
   end
   object ButtonDOT: TButton
-    Left = 87
-    Top = 242
+    Left = 88
+    Top = 287
     Width = 35
     Height = 38
     Caption = ','
@@ -66,8 +66,8 @@ object MainF: TMainF
     OnClick = ButtonDOTClick
   end
   object Button3: TButton
-    Left = 87
-    Top = 110
+    Left = 88
+    Top = 155
     Width = 35
     Height = 38
     Caption = '3'
@@ -75,8 +75,8 @@ object MainF: TMainF
     OnClick = ButtonNumClick
   end
   object ButtonOPOSE: TButton
-    Left = 128
-    Top = 66
+    Left = 129
+    Top = 111
     Width = 35
     Height = 38
     Caption = #177
@@ -84,8 +84,8 @@ object MainF: TMainF
     OnClick = ButtonOPOSEClick
   end
   object Button2: TButton
-    Left = 47
-    Top = 110
+    Left = 48
+    Top = 155
     Width = 34
     Height = 38
     Caption = '2'
@@ -93,8 +93,8 @@ object MainF: TMainF
     OnClick = ButtonNumClick
   end
   object Button1: TButton
-    Left = 7
-    Top = 110
+    Left = 8
+    Top = 155
     Width = 34
     Height = 38
     Caption = '1'
@@ -102,8 +102,8 @@ object MainF: TMainF
     OnClick = ButtonNumClick
   end
   object Button4: TButton
-    Left = 7
-    Top = 154
+    Left = 8
+    Top = 199
     Width = 34
     Height = 38
     Caption = '4'
@@ -111,8 +111,8 @@ object MainF: TMainF
     OnClick = ButtonNumClick
   end
   object Button9: TButton
-    Left = 87
-    Top = 198
+    Left = 88
+    Top = 243
     Width = 35
     Height = 38
     Caption = '9'
@@ -120,8 +120,8 @@ object MainF: TMainF
     OnClick = ButtonNumClick
   end
   object ButtonSQRT: TButton
-    Left = 169
-    Top = 66
+    Left = 170
+    Top = 111
     Width = 34
     Height = 38
     Caption = #8730
@@ -130,8 +130,8 @@ object MainF: TMainF
   end
   object ButtonDIV: TButton
     Tag = 4
-    Left = 128
-    Top = 110
+    Left = 129
+    Top = 155
     Width = 35
     Height = 38
     Caption = '/'
@@ -140,8 +140,8 @@ object MainF: TMainF
   end
   object ButtonMULT: TButton
     Tag = 3
-    Left = 128
-    Top = 154
+    Left = 129
+    Top = 199
     Width = 35
     Height = 38
     Caption = '*'
@@ -150,8 +150,8 @@ object MainF: TMainF
   end
   object ButtonMINUS: TButton
     Tag = 2
-    Left = 128
-    Top = 198
+    Left = 129
+    Top = 243
     Width = 35
     Height = 38
     Caption = '-'
@@ -159,16 +159,17 @@ object MainF: TMainF
     OnClick = ButtonActionClick
   end
   object ButtonPERS: TButton
-    Left = 169
-    Top = 110
+    Left = 170
+    Top = 155
     Width = 34
     Height = 38
     Caption = '%'
     TabOrder = 15
+    OnClick = ButtonPERSClick
   end
   object ButtonDROB: TButton
-    Left = 169
-    Top = 154
+    Left = 170
+    Top = 199
     Width = 34
     Height = 38
     Caption = '1/x'
@@ -176,8 +177,8 @@ object MainF: TMainF
     OnClick = ButtonDROBClick
   end
   object ButtonEQUAL: TButton
-    Left = 169
-    Top = 198
+    Left = 170
+    Top = 243
     Width = 34
     Height = 82
     Caption = '='
@@ -185,8 +186,8 @@ object MainF: TMainF
     OnClick = ButtonEQUALClick
   end
   object ButtonREMOVE: TButton
-    Left = 7
-    Top = 66
+    Left = 8
+    Top = 111
     Width = 34
     Height = 38
     Caption = '<--'
@@ -194,8 +195,8 @@ object MainF: TMainF
     OnClick = ButtonREMOVEClick
   end
   object ButtonCE: TButton
-    Left = 47
-    Top = 66
+    Left = 48
+    Top = 111
     Width = 34
     Height = 38
     Caption = 'CE'
@@ -204,8 +205,8 @@ object MainF: TMainF
   end
   object ButtonPLUS: TButton
     Tag = 1
-    Left = 128
-    Top = 242
+    Left = 129
+    Top = 287
     Width = 34
     Height = 38
     Caption = '+'
@@ -213,8 +214,8 @@ object MainF: TMainF
     OnClick = ButtonActionClick
   end
   object ButtonC: TButton
-    Left = 88
-    Top = 66
+    Left = 89
+    Top = 111
     Width = 34
     Height = 38
     Caption = 'C'
@@ -222,8 +223,8 @@ object MainF: TMainF
     OnClick = ButtonCClick
   end
   object Button6: TButton
-    Left = 88
-    Top = 154
+    Left = 89
+    Top = 199
     Width = 34
     Height = 38
     Caption = '6'
@@ -238,6 +239,7 @@ object MainF: TMainF
     Alignment = taRightJustify
     TabOrder = 23
     Text = '0'
+    OnEnter = EditResultEnter
     OnKeyPress = EditResultKeyPress
   end
   object OPERATIONEdit: TEdit
@@ -249,6 +251,55 @@ object MainF: TMainF
     ReadOnly = True
     TabOrder = 24
   end
+  object ButtonMPlus: TButton
+    Tag = 3
+    Left = 129
+    Top = 67
+    Width = 35
+    Height = 38
+    Caption = 'M+'
+    TabOrder = 25
+    OnClick = ButtonMemoryClick
+  end
+  object ButtonMMinus: TButton
+    Tag = 4
+    Left = 171
+    Top = 67
+    Width = 34
+    Height = 38
+    Caption = 'M-'
+    TabOrder = 26
+    OnClick = ButtonMemoryClick
+  end
+  object ButtonMC: TButton
+    Left = 8
+    Top = 67
+    Width = 34
+    Height = 38
+    Caption = 'MC'
+    TabOrder = 27
+    OnClick = ButtonMemoryClick
+  end
+  object ButtonMR: TButton
+    Tag = 1
+    Left = 48
+    Top = 67
+    Width = 34
+    Height = 38
+    Caption = 'MR'
+    TabOrder = 28
+    OnClick = ButtonMemoryClick
+  end
+  object ButtonMS: TButton
+    Tag = 2
+    Left = 89
+    Top = 67
+    Width = 34
+    Height = 38
+    Caption = 'MS'
+    TabOrder = 29
+    OnClick = ButtonMemoryClick
+  end
   object MainMenu1: TMainMenu
     Left = 152
     Top = 11
@@ -259,10 +310,10 @@ object MainF: TMainF
         OnClick = MExitClick
       end
     end
-    object MHelp: TMenuItem
+    object N1: TMenuItem
       Caption = #1057#1087#1088#1072#1074#1082#1072
-      object MHistory: TMenuItem
-        Caption = #1048#1089#1090#1086#1088#1080#1103
+      object N2: TMenuItem
+        Caption = #1054' '#1087#1088#1086#1075#1088#1072#1084#1084#1077
       end
     end
   end
